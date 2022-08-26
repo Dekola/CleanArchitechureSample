@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="standard_margin">8dp</dimen>
+    <dimen name="standard_padding">4dp</dimen>
+    <dimen name="divider_height">1dp</dimen>
+    <dimen name="progress_bar_size">50dp</dimen>
+</resources>

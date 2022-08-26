@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">FHRS</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="authorities_fragment_label">Authorities</string>
+    <string name="authorities_paginated_fragment_label">Authorities Paginated</string>
+    <string name="authorities">Authorities</string>
+    <string name="paginated_authorities">Authorities with Pagination</string>
+    <string name="flow_authorities">Authorities With Flow</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="no_internet_connection">No internet connection found</string>
+
+</resources>

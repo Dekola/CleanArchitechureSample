@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/FirstFragment">
+
+    <fragment
+        android:id="@+id/FirstFragment"
+        android:name="com.dekola.fhrs.ui.FirstFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_first">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_AuthoritiesFragment"
+            app:destination="@id/AuthoritiesFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_AuthoritiesPaginatedFragment"
+            app:destination="@id/AuthoritiesPaginatedFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_AuthoritiesFlowFragment"
+            app:destination="@id/AuthoritiesFlowFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/AuthoritiesFragment"
+        android:name="com.dekola.fhrs.ui.authorities.AuthoritiesFragment"
+        android:label="@string/authorities_fragment_label"
+        tools:layout="@layout/fragment_authorities">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/AuthoritiesPaginatedFragment"
+        android:name="com.dekola.fhrs.ui.authorities.AuthoritiesPaginatedFragment"
+        android:label="@string/authorities_paginated_fragment_label"
+        tools:layout="@layout/fragment_authorities">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/AuthoritiesFlowFragment"
+        android:name="com.dekola.fhrs.ui.authorities.AuthoritiesFlowFragment"
+        android:label="@string/flow_authorities"
+        tools:layout="@layout/fragment_authorities">
+
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+
+</navigation>
