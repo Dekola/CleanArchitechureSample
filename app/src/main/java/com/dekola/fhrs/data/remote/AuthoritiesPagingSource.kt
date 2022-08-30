@@ -7,7 +7,7 @@ import com.dekola.fhrs.data.toPresentation
 import com.dekola.fhrs.network.api.AuthoritiesApiService
 import org.json.JSONObject
 
-const val MOVIE_STARTING_PAGE_INDEX = 1
+const val AUTHORITIES_STARTING_PAGE_INDEX = 1
 const val NETWORK_PAGE_SIZE = 10
 
 class AuthoritiesPagingSource(
@@ -15,7 +15,7 @@ class AuthoritiesPagingSource(
 ) : PagingSource<Int, AuthoritiesPresentation>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, AuthoritiesPresentation> {
-        val position = params.key ?: MOVIE_STARTING_PAGE_INDEX
+        val position = params.key ?: AUTHORITIES_STARTING_PAGE_INDEX
         return try {
             val response =
                 authoritiesApi.getPaginationAuthorities(position, NETWORK_PAGE_SIZE)
@@ -31,7 +31,7 @@ class AuthoritiesPagingSource(
                 items?.let {
                     LoadResult.Page(
                         data = items.map { it.toPresentation() },
-                        prevKey = if (position == MOVIE_STARTING_PAGE_INDEX) null else position - 1,
+                        prevKey = if (position == AUTHORITIES_STARTING_PAGE_INDEX) null else position - 1,
                         nextKey = nextKey
                     )
                 } ?: run {

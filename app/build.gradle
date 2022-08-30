@@ -87,4 +87,9 @@ dependencies {
 
     //Paging
     implementation("androidx.paging:paging-runtime-ktx:$paging_version")
+
+    testImplementation "io.mockk:mockk:$mockk_version"
+    testImplementation "io.mockk:mockk-agent-jvm:$mockk_version"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:5.7.0"
+
 }

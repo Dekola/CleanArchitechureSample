@@ -8,7 +8,7 @@ import com.dekola.fhrs.data.model.AuthoritiesPresentation
 import com.dekola.fhrs.databinding.AuthorityItemBinding
 
 class AuthoritiesPagingDataAdapter(private val onItemClicked: (AuthoritiesPresentation?) -> Unit) :
-    PagingDataAdapter<AuthoritiesPresentation, AuthoritiesViewHolder>(MovieListDiff) {
+    PagingDataAdapter<AuthoritiesPresentation, AuthoritiesViewHolder>(AuthoritiesListDiff) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AuthoritiesViewHolder {
         val binding = AuthorityItemBinding.inflate(LayoutInflater.from(parent.context))
@@ -19,7 +19,7 @@ class AuthoritiesPagingDataAdapter(private val onItemClicked: (AuthoritiesPresen
         getItem(position)?.let { holder.bindItem(it) }
     }
 
-    object MovieListDiff : DiffUtil.ItemCallback<AuthoritiesPresentation>() {
+    object AuthoritiesListDiff : DiffUtil.ItemCallback<AuthoritiesPresentation>() {
         override fun areItemsTheSame(
             oldItem: AuthoritiesPresentation,
             newItem: AuthoritiesPresentation,

@@ -1,5 +1,6 @@
 package com.dekola.fhrs.ui.authorities
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,9 +10,9 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.dekola.fhrs.R
-import com.dekola.fhrs.data.repository.IAuthoritiesRepository
 import com.dekola.fhrs.data.Result
 import com.dekola.fhrs.data.model.AuthoritiesPresentation
+import com.dekola.fhrs.data.repository.IAuthoritiesRepository
 import com.dekola.fhrs.data.wrapper.ToastWrapper
 import com.dekola.fhrs.network.NetworkConnectivity
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,6 +26,9 @@ class AuthoritiesViewModel @Inject constructor(
     private val networkConnectivity: NetworkConnectivity,
 ) : ViewModel() {
 
+    private val _toastLiveData = MutableLiveData<ToastWrapper>()
+    var toastLiveData: LiveData<ToastWrapper> = _toastLiveData
+
     private val _loadLiveData = MutableLiveData<Boolean>()
     val loadLiveData: LiveData<Boolean> = _loadLiveData
 
@@ -33,16 +37,20 @@ class AuthoritiesViewModel @Inject constructor(
 
     fun getAuthorities() {
         viewModelScope.launch {
-            _loadLiveData.postValue(true)
-            when (val authoritiesResult = authoritiesRepository.getAuthorities()) {
-                is Result.Error -> {
-                    _authoritiesResult.postValue(AuthoritiesResult(errorMessage = authoritiesResult.errorMessage))
+            if (!networkConnectivity.isConnected()) {
+                _toastLiveData.postValue(ToastWrapper(R.string.no_internet_connection))
+            } else {
+                _loadLiveData.postValue(true)
+                when (val authoritiesResult = authoritiesRepository.getAuthorities()) {
+                    is Result.Error -> {
+                        _authoritiesResult.postValue(AuthoritiesResult(errorMessage = authoritiesResult.errorMessage))
+                    }
+                    is Result.Success -> {
+                        _authoritiesResult.postValue(AuthoritiesResult(success = authoritiesResult.data))
+                    }
                 }
-                is Result.Success -> {
-                    _authoritiesResult.postValue(AuthoritiesResult(success = authoritiesResult.data))
-                }
+                _loadLiveData.postValue(false)
             }
-            _loadLiveData.postValue(false)
         }
     }
 
@@ -71,9 +79,6 @@ class AuthoritiesViewModel @Inject constructor(
 
     val authoritiesPaginationLiveData: LiveData<PagingData<AuthoritiesPresentation>> =
         _authoritiesPaginationLiveData
-
-    private val _toastLiveData = MutableLiveData<ToastWrapper>()
-    var toastLiveData: LiveData<ToastWrapper> = _toastLiveData
 
     fun getAuthoritiesPagination() {
         viewModelScope.launch {

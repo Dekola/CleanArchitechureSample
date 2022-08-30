@@ -52,9 +52,9 @@ class AuthoritiesPaginatedFragment : Fragment() {
         with(authoritiesViewModel) {
             getAuthoritiesPagination()
 
-            authoritiesPaginationLiveData.observe(viewLifecycleOwner) { movieResponse ->
+            authoritiesPaginationLiveData.observe(viewLifecycleOwner) { authoritiesResponse ->
 //                binding.progressBar.visibility = View.GONE
-                authoritiesPagingDataAdapter.submitData(lifecycle, movieResponse)
+                authoritiesPagingDataAdapter.submitData(lifecycle, authoritiesResponse)
             }
 
             loadLiveData.observe(viewLifecycleOwner) { load ->

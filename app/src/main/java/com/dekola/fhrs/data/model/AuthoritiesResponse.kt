@@ -11,7 +11,7 @@ data class AuthoritiesResponse(
 	val links: List<LinksItem?>? = null,
 
 	@field:SerializedName("authorities")
-	val authorities: List<AuthoritiesResponseItem>? = null
+	var authorities: List<AuthoritiesResponseItem>? = null
 )
 
 data class Meta(
